@@ -6,20 +6,15 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 
 const isDevServer = process.env.NODE_ENV !== 'production';
-const babelMetadataPlugin = isDevServer
-  ? require('./plugins/visual-edits/babel-metadata-plugin')
-  : null;
+// babel-metadata-plugin is for JS files and is incompatible with TypeScript syntax
+// Disabled to prevent compilation errors in .tsx files
 const setupDevServer = isDevServer
   ? require('./plugins/visual-edits/dev-server-setup')
   : null;
 
 export default defineConfig({
   plugins: [
-    react({
-      babel: babelMetadataPlugin
-        ? { plugins: [babelMetadataPlugin] }
-        : undefined,
-    }),
+    react(),
     {
       name: 'visual-edits-server',
       configureServer(server) {
