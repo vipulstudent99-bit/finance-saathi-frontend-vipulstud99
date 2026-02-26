@@ -39,6 +39,14 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
+    // Prefer TypeScript files over JavaScript when both exist
+    extensions: ['.mts', '.ts', '.tsx', '.mjs', '.js', '.jsx', '.json'],
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      // Handle .js files with JSX
+      loader: { '.js': 'jsx' },
+    },
   },
   server: {
     port: 3000,
