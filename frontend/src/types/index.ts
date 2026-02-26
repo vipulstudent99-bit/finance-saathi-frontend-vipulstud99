@@ -9,7 +9,9 @@ export type VoucherSubType =
   | 'OWNER_WITHDRAWAL'
   | 'CASH_TO_BANK'
   | 'BANK_TO_CASH'
-  | 'MANUAL_JOURNAL';
+  | 'MANUAL_JOURNAL'
+  | 'RECEIPT';
+export type PaymentCategory = 'SALARY' | 'RENT' | 'FREIGHT' | 'UTILITY' | 'OTHER';
 export type VoucherStatus = 'DRAFT' | 'POSTED' | 'CANCELLED';
 export type PartyType = 'CUSTOMER' | 'SUPPLIER' | 'BOTH';
 export type BalanceSide = 'DR' | 'CR';
@@ -50,17 +52,18 @@ export interface CreateVoucherPayload {
   voucherDate: string;
   narration?: string;
   partyId?: string;
+  paymentCategory?: PaymentCategory;
 }
 
 export interface TrialBalanceRow {
-  accountId: string;
-  accountCode: string;
+  accountId?: string;
+  accountCode?: string;
   accountName: string;
-  accountType: string;
+  accountType?: string;
   debit: number;
   credit: number;
-  balance: number;
-  balanceSide: BalanceSide;
+  balance?: number;
+  balanceSide?: BalanceSide;
 }
 
 export interface TrialBalanceReport {
@@ -70,18 +73,9 @@ export interface TrialBalanceReport {
   isBalanced: boolean;
 }
 
-export interface PLLineItem {
-  accountId: string;
-  accountCode: string;
-  accountName: string;
-  amount: number;
-}
-
 export interface ProfitLossReport {
-  income: PLLineItem[];
-  expenses: PLLineItem[];
-  totalIncome: number;
-  totalExpenses: number;
+  income: number;
+  expenses: number;
   netProfit: number;
 }
 
