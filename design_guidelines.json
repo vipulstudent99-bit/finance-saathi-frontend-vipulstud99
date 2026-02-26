@@ -1,0 +1,149 @@
+{
+  "identity": {
+    "name": "FINANCESAATHI",
+    "tone": "Professional, Efficient, Trustworthy, Indian Context",
+    "persona": "The Modern Digital Accountant",
+    "theme": "light",
+    "primary_audience": "Business Owners & Staff (Non-accountants)"
+  },
+  "typography": {
+    "font_family": {
+      "heading": "Manrope, sans-serif",
+      "body": "Inter, sans-serif",
+      "mono": "JetBrains Mono, monospace"
+    },
+    "scale": {
+      "h1": "text-4xl font-bold tracking-tight",
+      "h2": "text-3xl font-semibold tracking-tight",
+      "h3": "text-2xl font-semibold",
+      "h4": "text-xl font-medium",
+      "body": "text-sm leading-relaxed",
+      "small": "text-xs text-muted-foreground",
+      "large_number": "text-3xl font-mono font-bold tracking-tight"
+    },
+    "imports": [
+      "@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');"
+    ]
+  },
+  "colors": {
+    "base": {
+      "background": "#F8FAFC", 
+      "foreground": "#0F172A",
+      "card": "#FFFFFF",
+      "card_foreground": "#0F172A",
+      "popover": "#FFFFFF",
+      "popover_foreground": "#0F172A",
+      "primary": "#2563EB", 
+      "primary_foreground": "#FFFFFF",
+      "secondary": "#F1F5F9",
+      "secondary_foreground": "#0F172A",
+      "muted": "#F1F5F9",
+      "muted_foreground": "#64748B",
+      "accent": "#F1F5F9",
+      "accent_foreground": "#0F172A",
+      "destructive": "#E11D48", 
+      "destructive_foreground": "#FFFFFF",
+      "border": "#E2E8F0",
+      "input": "#E2E8F0",
+      "ring": "#2563EB"
+    },
+    "semantic": {
+      "success": "#10B981", 
+      "success_foreground": "#FFFFFF",
+      "warning": "#F59E0B", 
+      "warning_foreground": "#FFFFFF",
+      "info": "#3B82F6", 
+      "sidebar_bg": "#0F172A",
+      "sidebar_fg": "#F8FAFC",
+      "sidebar_border": "#1E293B",
+      "sidebar_active": "#1E293B"
+    },
+    "charts": {
+      "chart_1": "#2563EB",
+      "chart_2": "#10B981",
+      "chart_3": "#E11D48",
+      "chart_4": "#F59E0B",
+      "chart_5": "#8B5CF6"
+    }
+  },
+  "layout_strategy": {
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "spacing": {
+      "section_gap": "gap-8",
+      "component_padding": "p-6",
+      "card_gap": "gap-6"
+    },
+    "grid": {
+      "dashboard": "grid grid-cols-1 md:grid-cols-12 gap-6",
+      "record_transaction": "grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6",
+      "bento_hero": "col-span-1 md:col-span-8",
+      "bento_side": "col-span-1 md:col-span-4"
+    },
+    "sidebar": {
+      "width_desktop": "w-64",
+      "mobile_nav_height": "h-16"
+    }
+  },
+  "visual_enhancers": {
+    "radius": "0.5rem",
+    "shadows": {
+      "card": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+      "hover": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+      "dropdown": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)"
+    },
+    "borders": "border border-border",
+    "glass": "bg-white/80 backdrop-blur-md border-white/20"
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 rounded-md transition-all active:scale-95",
+      "secondary": "bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2 rounded-md transition-all active:scale-95",
+      "destructive": "bg-destructive text-destructive-foreground hover:bg-destructive/90 h-10 px-4 py-2 rounded-md transition-all active:scale-95",
+      "ghost": "hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 rounded-md transition-all active:scale-95",
+      "outline": "border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 rounded-md transition-all active:scale-95"
+    },
+    "cards": {
+      "base": "rounded-lg border bg-card text-card-foreground shadow-sm",
+      "header": "flex flex-col space-y-1.5 p-6",
+      "content": "p-6 pt-0",
+      "footer": "flex items-center p-6 pt-0"
+    },
+    "inputs": {
+      "base": "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+    }
+  },
+  "formatting_rules": {
+    "currency": "en-IN",
+    "date": "dd/MM/yyyy",
+    "decimal_places": 2
+  },
+  "assets": {
+    "icons": "Lucide React (lucide-react)",
+    "images": {
+       "dashboard_hero_bg": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&q=80&w=2000",
+       "login_bg": "https://images.unsplash.com/photo-1565514020176-dbf2277e9973?auto=format&fit=crop&q=80&w=2000"
+    }
+  },
+  "universal_guidelines": [
+    "Use 'Indian Rupee' formatting (₹1,00,000.00) strictly for all currency values.",
+    "Dates must be DD/MM/YYYY.",
+    "Sidebar is DARK (#0F172A) with white text. Main content area is LIGHT (#F8FAFC).",
+    "Mobile navigation is a fixed BOTTOM TAB BAR (5 tabs).",
+    "Record Transaction screen uses a 2x3 or 3x2 grid of LARGE cards with icons.",
+    "Use 'Green' for Money In/Receivables, 'Red' for Money Out/Payables, 'Blue' for general balances.",
+    "Do NOT use gradients for backgrounds. Use solid colors or very subtle patterns.",
+    "Ensure all interactive elements have hover states and active states.",
+    "Use 'JetBrains Mono' for large financial numbers to ensure readability.",
+    "Loading skeletons are mandatory for all async data."
+  ],
+  "instructions_to_main_agent": [
+    "Install 'clsx' and 'tailwind-merge' if not present (utilize cn helper).",
+    "Install 'lucide-react' for icons.",
+    "Install 'date-fns' for date formatting.",
+    "Install 'recharts' for charts.",
+    "Set up the Tailwind config with the custom colors provided in 'colors.base' and 'colors.semantic'.",
+    "Create a 'Layout' component that handles the Sidebar (Desktop) and BottomNav (Mobile) logic.",
+    "Create a reusable 'MoneyCard' component for the dashboard summary.",
+    "Implement the 'RecordTransaction' grid as the central action hub."
+  ]
+}
