@@ -56,9 +56,10 @@
     "zod": "^3.24.4"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test"
+    "start": "vite --port 3000 --host 0.0.0.0",
+    "dev": "vite --port 3000 --host 0.0.0.0",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "browserslist": {
     "production": [
