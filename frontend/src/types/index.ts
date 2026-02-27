@@ -33,7 +33,7 @@ export interface Party {
 export interface Voucher {
   voucherId: string;
   voucherType: VoucherType;
-  subType: VoucherSubType | null;   // ← FIXED: was VoucherSubType (non-nullable), now allows null
+  subType: VoucherSubType | null;
   voucherDate: string;
   totalAmount: number;
   status: VoucherStatus;
@@ -73,9 +73,20 @@ export interface TrialBalanceReport {
   isBalanced: boolean;
 }
 
+// P&L line item (one account row)
+export interface ProfitLossLineItem {
+  accountId: string;
+  accountCode: string;
+  accountName: string;
+  amount: number;
+}
+
+// Full P&L response shape from backend
 export interface ProfitLossReport {
-  income: number;
-  expenses: number;
+  income: ProfitLossLineItem[];       // array of income account rows
+  expenses: ProfitLossLineItem[];     // array of expense account rows
+  totalIncome: number;                // ← was incorrectly typed as `income: number`
+  totalExpenses: number;              // ← was incorrectly typed as `expenses: number`
   netProfit: number;
 }
 

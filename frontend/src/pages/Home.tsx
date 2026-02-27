@@ -60,23 +60,61 @@ export default function Home() {
     .reduce((s, r) => s + (r.balanceSide === 'DR' ? r.balance ?? r.debit - r.credit : -(r.balance ?? r.credit - r.debit)), 0) ?? null;
 
   const STAT_CARDS = [
-    { label: 'Cash in Hand', value: cashBalance, icon: Banknote, bg: 'bg-emerald-100', color: 'text-emerald-600', sub: 'Current balance', err: errors.tb },
-    { label: 'Bank Balance', value: bankBalance, icon: Building2, bg: 'bg-blue-100', color: 'text-blue-600', sub: 'Across accounts', err: errors.tb },
-    { label: 'This Month Sales', value: plData?.income ?? null, icon: TrendingUp, bg: 'bg-emerald-100', color: 'text-emerald-600', sub: 'Total income', err: errors.pl },
-    { label: 'This Month Spend', value: plData?.expenses ?? null, icon: TrendingDown, bg: 'bg-rose-100', color: 'text-rose-600', sub: 'Total expenses', err: errors.pl },
+    {
+      label: 'Cash in Hand',
+      // cash balance derived from trial balance
+      value: cashBalance,
+      icon: Banknote,
+      bg: 'bg-emerald-100',
+      color: 'text-emerald-600',
+      sub: 'Current balance',
+      err: errors.tb,
+    },
+    {
+      label: 'Bank Balance',
+      value: bankBalance,
+      icon: Building2,
+      bg: 'bg-blue-100',
+      color: 'text-blue-600',
+      sub: 'Across accounts',
+      err: errors.tb,
+    },
+    {
+      label: 'This Month Sales',
+      // FIXED: was plData?.income (array) — now correctly plData?.totalIncome (number)
+      value: plData?.totalIncome ?? null,
+      icon: TrendingUp,
+      bg: 'bg-emerald-100',
+      color: 'text-emerald-600',
+      sub: 'Total income',
+      err: errors.pl,
+    },
+    {
+      label: 'This Month Spend',
+      // FIXED: was plData?.expenses (array) — now correctly plData?.totalExpenses (number)
+      value: plData?.totalExpenses ?? null,
+      icon: TrendingDown,
+      bg: 'bg-rose-100',
+      color: 'text-rose-600',
+      sub: 'Total expenses',
+      err: errors.pl,
+    },
   ];
 
   const QUICK_ACTIONS = [
-    { label: 'Sale', desc: 'Record a sale', key: 'sale?m=CASH', icon: ShoppingCart, bg: 'bg-emerald-100', color: 'text-emerald-600' },
-    { label: 'Purchase', desc: 'Record a purchase', key: 'purchase?m=CASH', icon: Package, bg: 'bg-rose-100', color: 'text-rose-600' },
-    { label: 'Got Paid', desc: 'Received payment', key: 'receipt', icon: ArrowDownCircle, bg: 'bg-blue-100', color: 'text-blue-600' },
-    { label: 'Paid Bill', desc: 'Made a payment', key: 'payment?t=VENDOR', icon: ArrowUpCircle, bg: 'bg-amber-100', color: 'text-amber-600' },
+    { label: 'Sale',     desc: 'Record a sale',      key: 'sale?m=CASH',       icon: ShoppingCart,    bg: 'bg-emerald-100', color: 'text-emerald-600' },
+    { label: 'Purchase', desc: 'Record a purchase',  key: 'purchase?m=CASH',   icon: Package,         bg: 'bg-rose-100',    color: 'text-rose-600' },
+    { label: 'Got Paid', desc: 'Received payment',   key: 'receipt',           icon: ArrowDownCircle, bg: 'bg-blue-100',    color: 'text-blue-600' },
+    { label: 'Paid Bill',desc: 'Made a payment',     key: 'payment?t=VENDOR',  icon: ArrowUpCircle,   bg: 'bg-amber-100',   color: 'text-amber-600' },
   ];
 
   const borderByType: Record<string, string> = {
-    SALE: 'border-l-emerald-500', RECEIPT: 'border-l-blue-500',
-    PURCHASE: 'border-l-rose-500', PAYMENT: 'border-l-amber-500',
-    CONTRA: 'border-l-slate-500', JOURNAL: 'border-l-purple-500',
+    SALE:     'border-l-emerald-500',
+    RECEIPT:  'border-l-blue-500',
+    PURCHASE: 'border-l-rose-500',
+    PAYMENT:  'border-l-amber-500',
+    CONTRA:   'border-l-slate-500',
+    JOURNAL:  'border-l-purple-500',
   };
 
   return (
@@ -87,7 +125,7 @@ export default function Home() {
         <p className="text-sm text-slate-500 mt-1">Here's your business at a glance</p>
       </div>
 
-      {/* Stat Cards — 4 col grid */}
+      {/* Stat Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4" data-testid="summary-strip">
         {STAT_CARDS.map((c) => (
           <div key={c.label} className="bg-white rounded-xl border border-slate-200 shadow-sm p-5">
@@ -109,7 +147,7 @@ export default function Home() {
         ))}
       </div>
 
-      {/* Profit Status */}
+      {/* Profit Status Banner */}
       {!loading && plData && (
         <div
           className={`rounded-2xl p-5 flex items-center justify-between ${
@@ -120,10 +158,14 @@ export default function Home() {
           data-testid="profit-status-card"
         >
           <div>
-            <p className={`text-sm font-medium ${plData.netProfit >= 0 ? 'text-emerald-700' : 'text-rose-700'}`}>
+            <p className={`text-sm font-medium ${
+              plData.netProfit >= 0 ? 'text-emerald-700' : 'text-rose-700'
+            }`}>
               {plData.netProfit >= 0 ? "You're profitable this month" : 'Loss this month — review expenses'}
             </p>
-            <p className={`text-3xl font-mono font-bold mt-1 ${plData.netProfit >= 0 ? 'text-emerald-700' : 'text-rose-700'}`}>
+            <p className={`text-3xl font-mono font-bold mt-1 ${
+              plData.netProfit >= 0 ? 'text-emerald-700' : 'text-rose-700'
+            }`}>
               {formatCurrency(Math.abs(plData.netProfit))}
             </p>
           </div>
@@ -131,7 +173,9 @@ export default function Home() {
             <div className="text-3xl mb-1">{plData.netProfit >= 0 ? '📈' : '📉'}</div>
             <button
               onClick={() => navigate('/profit-loss')}
-              className={`text-xs font-medium flex items-center gap-1 ${plData.netProfit >= 0 ? 'text-emerald-600 hover:text-emerald-800' : 'text-rose-600 hover:text-rose-800'}`}
+              className={`text-xs font-medium flex items-center gap-1 ${
+                plData.netProfit >= 0 ? 'text-emerald-600 hover:text-emerald-800' : 'text-rose-600 hover:text-rose-800'
+              }`}
             >
               View P&L <ArrowRight className="h-3 w-3" />
             </button>
