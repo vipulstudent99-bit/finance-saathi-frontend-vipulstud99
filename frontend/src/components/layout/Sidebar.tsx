@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import {
   Home, Plus, Clock, Users, TrendingUp, TrendingDown,
-  BarChart2, BookOpen, ChevronLeft, ChevronRight, List,
+  BarChart2, BookOpen, ChevronLeft, ChevronRight, Banknote, Building2,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -34,6 +34,13 @@ const navGroups = [
     ],
   },
   {
+    label: 'BOOKS',
+    items: [
+      { to: '/cash-book', icon: Banknote, label: 'Cash Book' },
+      { to: '/bank-book', icon: Building2, label: 'Bank Book' },
+    ],
+  },
+  {
     label: 'REPORTS',
     items: [
       { to: '/trial-balance', icon: BookOpen, label: 'Trial Balance' },
@@ -59,7 +66,7 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
             <div className="h-7 w-7 rounded-lg bg-emerald-500 flex items-center justify-center text-white font-bold text-sm">
               ₹
             </div>
-            <span className="font-bold text-white text-lg tracking-tight font-display">
+            <span className="font-bold text-white text-lg tracking-tight">
               FinanceSaathi
             </span>
           </div>

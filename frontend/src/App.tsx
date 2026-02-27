@@ -11,6 +11,8 @@ import TrialBalance from '@/pages/TrialBalance';
 import ProfitLoss from '@/pages/ProfitLoss';
 import Receivables from '@/pages/Receivables';
 import Payables from '@/pages/Payables';
+import CashBook from '@/pages/CashBook';
+import BankBook from '@/pages/BankBook';
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
           <Route path="/profit-loss" element={<ProfitLoss />} />
           <Route path="/receivables" element={<Receivables />} />
           <Route path="/payables" element={<Payables />} />
+          <Route path="/cash-book" element={<CashBook />} />
+          <Route path="/bank-book" element={<BankBook />} />
         </Routes>
       </Layout>
     </BrowserRouter>
