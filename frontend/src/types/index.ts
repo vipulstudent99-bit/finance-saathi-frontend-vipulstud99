@@ -33,14 +33,14 @@ export interface Party {
 export interface Voucher {
   voucherId: string;
   voucherType: VoucherType;
-  subType: VoucherSubType;
+  subType: VoucherSubType | null;   // ← FIXED: was VoucherSubType (non-nullable), now allows null
   voucherDate: string;
   totalAmount: number;
   status: VoucherStatus;
-  narration?: string;
-  partyId?: string;
-  partyName?: string;
-  voucherNumber?: number;
+  narration?: string | null;
+  partyId?: string | null;
+  partyName?: string | null;
+  voucherNumber?: number | null;
   createdAt: string;
 }
 

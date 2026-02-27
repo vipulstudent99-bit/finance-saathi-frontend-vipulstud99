@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/Badge';
 import { InlineConfirm } from '@/components/ui/InlineConfirm';
 import { formatCurrency } from '@/utils/formatCurrency';
 import { formatDate } from '@/utils/formatDate';
-import { describeVoucher } from '@/utils/transactionHelpers';
+import { describeVoucher, getSubTypeLabel } from '@/utils/transactionHelpers';
 import { voucherApi } from '@/services/api';
 import type { Voucher } from '@/types';
 
@@ -14,6 +14,23 @@ interface PendingEntryRowProps {
   onDeleted: () => void;
   onEdit: (v: Voucher) => void;
 }
+
+// Badge colour per subType group
+const getSubTypeBadgeClass = (subType: Voucher['subType'], voucherType: Voucher['voucherType']): string => {
+  if (subType === 'CASH_SALE' || subType === 'CREDIT_SALE' || voucherType === 'RECEIPT') {
+    return 'bg-emerald-100 text-emerald-700';
+  }
+  if (subType === 'CASH_PURCHASE' || subType === 'CREDIT_PURCHASE') {
+    return 'bg-rose-100 text-rose-700';
+  }
+  if (subType === 'EXPENSE_PAYMENT' || subType === 'VENDOR_PAYMENT' || subType === 'OWNER_WITHDRAWAL') {
+    return 'bg-amber-100 text-amber-700';
+  }
+  if (subType === 'CASH_TO_BANK' || subType === 'BANK_TO_CASH') {
+    return 'bg-blue-100 text-blue-700';
+  }
+  return 'bg-slate-100 text-slate-600';
+};
 
 export function PendingEntryRow({ voucher, onPosted, onDeleted, onEdit }: PendingEntryRowProps) {
   const [posting, setPosting] = useState(false);
@@ -40,6 +57,9 @@ export function PendingEntryRow({ voucher, onPosted, onDeleted, onEdit }: Pendin
   const isIncome =
     voucher.voucherType === 'SALE' || voucher.voucherType === 'RECEIPT';
 
+  const subTypeLabel = getSubTypeLabel(voucher.subType, voucher.voucherType);
+  const subTypeBadgeClass = getSubTypeBadgeClass(voucher.subType, voucher.voucherType);
+
   return (
     <div
       className="bg-white rounded-xl border border-slate-200 p-4 hover:border-slate-300 transition-all"
@@ -53,8 +73,12 @@ export function PendingEntryRow({ voucher, onPosted, onDeleted, onEdit }: Pendin
               <p className="font-semibold text-slate-800 text-sm">
                 {describeVoucher(voucher)}
               </p>
-              <div className="flex items-center gap-2 mt-1">
+              <div className="flex items-center gap-2 mt-1 flex-wrap">
                 <span className="text-xs text-slate-400">{formatDate(voucher.voucherDate)}</span>
+                {/* Human-readable subType badge — replaces the old N/A */}
+                <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${subTypeBadgeClass}`}>
+                  {subTypeLabel}
+                </span>
                 <Badge variant="draft">Pending</Badge>
               </div>
             </div>
