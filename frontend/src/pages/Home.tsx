@@ -62,7 +62,6 @@ export default function Home() {
   const STAT_CARDS = [
     {
       label: 'Cash in Hand',
-      // cash balance derived from trial balance
       value: cashBalance,
       icon: Banknote,
       bg: 'bg-emerald-100',
@@ -81,7 +80,6 @@ export default function Home() {
     },
     {
       label: 'This Month Sales',
-      // FIXED: was plData?.income (array) — now correctly plData?.totalIncome (number)
       value: plData?.totalIncome ?? null,
       icon: TrendingUp,
       bg: 'bg-emerald-100',
@@ -91,7 +89,6 @@ export default function Home() {
     },
     {
       label: 'This Month Spend',
-      // FIXED: was plData?.expenses (array) — now correctly plData?.totalExpenses (number)
       value: plData?.totalExpenses ?? null,
       icon: TrendingDown,
       bg: 'bg-rose-100',
@@ -121,8 +118,10 @@ export default function Home() {
     <div className="max-w-5xl mx-auto px-6 py-8 space-y-8" data-testid="home-page">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">{getGreeting()} 👋</h1>
-        <p className="text-sm text-slate-500 mt-1">Here's your business at a glance</p>
+        <h1 className="text-2xl font-bold text-slate-900">
+          {getGreeting()}, Vaishu! 🫡
+        </h1>
+        <p className="text-sm text-slate-500 mt-1">आपका स्वागत है — yahan hai aapka poora hisaab 📊✨</p>
       </div>
 
       {/* Stat Cards */}
